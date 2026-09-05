@@ -18,5 +18,5 @@ app.get("/health", (req, res) => {
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(Singh Kitchen running on port ${PORT});
+  console.log("Singh Kitchen server started");
 });
