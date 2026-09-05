@@ -112,19 +112,18 @@ function downloadInvoice(){
 function confirmOrder(){
   var details="",i,v,msg,wa;
   if(!pending||!verifiedPayment){alert("Please enter your UPI transaction/reference number first.");return;}
-  for(i=0;i<pending.lines.length;i++){v=pending.lines[i];details+=(i+1)+". "+v.x[0]+" x "+v.q+" = ₹"+(v.x[1]*v.q)+(v.x[2]?" ("+v.x[2]+")":"")+(i<pending.lines.length-1?"
-":"");}
-  msg="Hello Singh Kitchen, I have paid by UPI QR and want to place this combined order:
-
-"+details+"
-
-Total Quantity: "+pending.qty+"
-Food Amount: ₹"+pending.itemTotal+"
-Delivery Charges: ₹"+pending.delivery+"
-Total Amount Paid: ₹"+pending.total+"
-UPI Transaction/Reference Number: "+verifiedPayment.paymentId+"
-
-Please verify the payment and confirm my order. Please ask me to share my location, name and complete address.";
+  for(i=0;i<pending.lines.length;i++){
+    v=pending.lines[i];
+    details+=(i+1)+". "+v.x[0]+" x "+v.q+" = ₹"+(v.x[1]*v.q)+(v.x[2]?" ("+v.x[2]+")":"")+(i<pending.lines.length-1?"\n":"");
+  }
+  msg="Hello Singh Kitchen, I have paid by UPI QR and want to place this combined order:\n\n"
+    +details
+    +"\n\nTotal Quantity: "+pending.qty
+    +"\nFood Amount: ₹"+pending.itemTotal
+    +"\nDelivery Charges: ₹"+pending.delivery
+    +"\nTotal Amount Paid: ₹"+pending.total
+    +"\nUPI Transaction/Reference Number: "+verifiedPayment.paymentId
+    +"\n\nPlease verify the payment and confirm my order. Please ask me to share my location, name and complete address.";
   wa=window.open("https://wa.me/918544938218?text="+encodeURIComponent(msg),"_blank");
   if(!wa){window.location.href="https://wa.me/918544938218?text="+encodeURIComponent(msg);return;}
   closePay();
